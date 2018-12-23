@@ -51,7 +51,7 @@ public class HostResources {
         try {
             hostName = "Hostname: " + InetAddress.getLocalHost().getHostName() + newLine;
             osName = "Operating system: " + System.getProperty("os.name") + " " + System.getProperty("os.version") + newLine ;
-            upTime = "Uptime: " + runCommand("uptime | awk '{print $3,$4,$5}' | cut -d',' -f1,2") + newLine;
+            upTime = "Uptime: " + runCommand("uptime | grep -oE 'up.*' | cut -d',' -f1,2 | sed 's/up //g'") + newLine;
             loadAvg = "Load AVG: " + runCommand("uptime | awk '{print $(NF-2),$(NF-1), $NF}'") + newLine;
             totalMem = "Total memory: " + runCommand("free -h | grep Mem | awk '{print $2}'") + ", ";
             usedMem = "Used memory: " + runCommand("free -h | grep Mem | awk '{print $3}'") + ", ";
