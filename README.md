@@ -6,7 +6,7 @@ This web application based on java and spring is a very simple web page which sh
 * Operating system
 * CPU% usage
 * Memory status
-* etc
+* etc  
 Scroll down to the bottom for screenshot.
 
 ## Project description:
