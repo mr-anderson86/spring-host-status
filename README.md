@@ -7,7 +7,7 @@ This web application based on java and spring is a very simple web page which sh
 * CPU% usage
 * Memory status
 * etc  
-Scroll down to the bottom for screenshot.
+Scroll down to the bottom of this README for screenshot.
 
 ## Project description:
 1. Setup a CI flow for the application
