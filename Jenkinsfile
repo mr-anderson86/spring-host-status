@@ -29,10 +29,11 @@ node('host_ci') {
       if ( ps_list > 0 ) {
           sh "docker rm -f `docker ps -a -f name=host-status-web -q`"
       }
-      sh "docker run -d --name host-status-web -p 8085:8085 host-status-web"
+      sh "docker run -d --name host-status-web -p 8085:8085 host-status"
       def image_list = sh(script: 'docker images -f dangling=true -q | wc -l', returnStdout: true).trim().toInteger()
       if ( image_list > 0 )  {
           sh "docker rmi `docker images -f dangling=true -q`"
       }
+      echo "[INFO] Done! Go via web browrser to your host at port 8085."
    }
 }
