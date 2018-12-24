@@ -67,7 +67,7 @@ public class HostResources {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String mainPage = "Welcome to the web host status application :-)" + newLine + newLine;
+        String mainPage = "Hello and welcome to the web host status application :-)" + newLine + newLine;
 
         mainPage = mainPage + hostName + osName + upTime + loadAvg + memUsage + cpuUsage;
         return mainPage;
