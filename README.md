@@ -1,7 +1,10 @@
 # Simple java sprint web application + CI/CD using jenkins, maven and docker
 
 ## Application description:
-This web application based on java and spring is a very simple web page which shows very basic host details such as:
+This web application based on java and spring.  
+Originally, initiated using this website: https://start.spring.io/ it's a very good site, highly recommended.  
+  
+The app is a very simple web page which shows very basic host details such as:
 * Hostname
 * Operating system
 * CPU% usage
