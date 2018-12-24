@@ -69,10 +69,10 @@ Creation of CI/CD job -
       - Runs a docker container using the image from above.
 
 # Final output:
-You can access the application via web browser, going to the deployment IP address:8085 
-(unless you changed the port in the Dockerfile or in the docker run command in the Jenkinsfile)
-Screenshot below:
-      ![Screenshot](https://github.com/mr-anderson86/spring-host-status/blob/master/screenshot.PNG)
+You can access the application via web browser, going to the deployment IP address:8085  
+(unless you changed the port in the Dockerfile or in the docker run command in the Jenkinsfile).  
+Screenshot below:  
+![Screenshot](https://github.com/mr-anderson86/spring-host-status/blob/master/screenshot.PNG)
 
 
 ### Ehe end :) ENJOY...
