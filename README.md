@@ -7,6 +7,7 @@ This web application based on java and spring is a very simple web page which sh
 * CPU% usage
 * Memory status
 * etc
+Scroll down to the bottom for screenshot.
 
 ## Project description:
 1. Setup a CI flow for the application
@@ -66,9 +67,11 @@ Creation of CI/CD job -
       - Build the docker image which contains the spring application.
     ## CD:  
       - Runs a docker container using the image from above.
-    ## Final output:
-      - You can access the application via web browser, going to the deployment IP address:8085 (unless you changed the port in the Dockerfile or in the docker run command in the Jenkinsfile)
-      - Screenshot below:
+
+# Final output:
+You can access the application via web browser, going to the deployment IP address:8085 
+(unless you changed the port in the Dockerfile or in the docker run command in the Jenkinsfile)
+Screenshot below:
       ![Screenshot](https://github.com/mr-anderson86/spring-host-status/blob/master/screenshot.PNG)
 
 
