@@ -25,12 +25,12 @@ node('host_ci') {
    }
    stage('Docker run') {
       //Deploying the docker image, meaning: runnig the host-status web application
-      def ps_list = sh(script: 'docker ps -a -f name=host-status-web -q | wc -l', returnStdout: true).trim()
+      def ps_list = sh(script: 'docker ps -a -f name=host-status-web -q | wc -l', returnStdout: true).trim().toInteger()
       if ( ps_list > 0 ) {
           sh "docker rm -f `docker ps -a -f name=host-status-web -q`"
       }
       sh "docker run -d --name host-status-web -p 8085:8085 host-status-web"
-      def image_list = sh(script: 'docker images -f dangling=true -q | wc -l', returnStdout: true).trim()
+      def image_list = sh(script: 'docker images -f dangling=true -q | wc -l', returnStdout: true).trim().toInteger()
       if ( image_list > 0 )  {
           sh "docker rmi `docker images -f dangling=true -q`"
       }
