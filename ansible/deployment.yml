@@ -1,0 +1,25 @@
+---
+- hosts: host-status-app
+  gather_facts: no
+
+  tasks:
+
+  - name: stop and remove container
+    docker_container:
+      name: host-status-web
+      state: absent
+
+  - name: start container
+    docker_container:
+      name: host-status-web
+      image: host-status
+      state: started
+      detach: yes
+      restart: yes
+      ports:
+        - "8085:8085"
+
+  - name: remove old docker image
+    docker_image:
+      name: <none>
+      state: absent
