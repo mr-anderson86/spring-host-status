@@ -66,7 +66,7 @@ Creation of CI/CD job:
       - Runs a docker container using the image from above.
   
 Screenshot below:  
-![Screenshot](images/cicd_screenshot.PNG | height="50%" width="50%")  
+![Screenshot](images/cicd_screenshot.PNG)  
   
 
 # Final output:
