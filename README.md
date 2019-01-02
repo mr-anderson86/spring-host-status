@@ -15,7 +15,7 @@ Scroll down to the bottom of this README for screenshot.
 
 ## Project description:
 1. Runs a CI flow for the application
-2. Build and deploy the project on a docker container
+2. Build and deploy the project on a docker container (using ansible playbook)
 3. Final output: a user will access your web application, and see the new changes (without any action what so ever from his side)
 
 ## Prerequisites
