@@ -33,9 +33,9 @@ Two/Three servers:
 
 ### Prerequisites - network
 1. Configure security groups:
-* allow SSH access to all machines
-* port 8085 for the application (CI machine or deployment machine)
-* Your Jenkins port for the orchestrator machine (8080/8081/http/https/whicever you choose)
+- allow SSH access to all machines
+- port 8085 for the application (CI machine or deployment machine)
+- Your Jenkins port for the orchestrator machine (8080/8081/http/https/whicever you choose)
 2. SSH access - configure a way to access with ssh (an opened user with password,or pem key file or any other method)
 3. On the Jenkins - configure a node which runs on the CI server ('host_ci') , and on the deployment server if you have any.
 
