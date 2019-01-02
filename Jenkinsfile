@@ -5,11 +5,11 @@ properties([
    disableConcurrentBuilds()
 ])
 
-node('host_ci') {
+node('mb_ccjp_eaasrt') {
    //def mvnHome = env.M2_HOME
    stage('Pull changes') { // for display purposes
       // Get some code from a GitHub repository
-      git poll: true, url: 'https://github.com/mr-anderson86/spring-host-status.git'
+      git poll: true, url: 'ssh://git@bitbucket:7999/bssproj/spring-example.git'
    }
    stage('Build') {
       // Run the maven - compile, test, and pack to rpm
@@ -24,16 +24,9 @@ node('host_ci') {
       sh "sudo docker build -t host-status ."
    }
    stage('Docker run') {
-      //Deploying the docker image, meaning: runnig the host-status web application
-      def ps_list = sh(script: 'sudo docker ps -a -f name=host-status-web -q | wc -l', returnStdout: true).trim().toInteger()
-      if ( ps_list > 0 ) {
-          sh "sudo docker rm -f `docker ps -a -f name=host-status-web -q`"
-      }
-      sh "sudo docker run -d --name host-status-web -p 8085:8085 host-status"
-      def image_list = sh(script: 'docker images -f dangling=true -q | wc -l', returnStdout: true).trim().toInteger()
-      if ( image_list > 0 )  {
-          sh "sudo docker rmi `docker images -f dangling=true -q`"
-      }
+      ansiblePlaybook( 
+         playbook: 'ansible/deployment.yml',
+         inventory: 'ansible/hosts.ini')
       echo "[INFO] Done! Go via web browrser to your host at port 8085."
    }
 }
