@@ -27,7 +27,7 @@ Scroll down to the bottom of this README for screenshot.
 ### Prerequisites - servers
 Two/Three servers:
 1. Orechestrator machine (ubuntu/redhat/any linux) - must have Jenkins.
-2. CI server - RedHat server, jdk 1.8, maven (3.3.9 is good), git, docker
+2. CI server - RedHat server, jdk 1.8, maven (3.3.9 is good), git, docker, ansible
 3. optional: deployment server (there you'll need only docker, but you will have to modify the Jenkinsfile to copy the docker image to this server and run container over there).
 
 
