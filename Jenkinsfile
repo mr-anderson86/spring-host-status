@@ -9,7 +9,7 @@ node('builder_node') {
    //def mvnHome = env.M2_HOME
    stage('Pull changes') { // for display purposes
       // Get some code from a GitHub repository
-      git poll: true, url: 'ssh://git@bitbucket:7999/bssproj/spring-example.git'
+      checkout scm
    }
    stage('Build') {
       // Run the maven - compile, test, and pack to rpm
