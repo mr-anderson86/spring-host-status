@@ -40,7 +40,7 @@ Two/Three servers:
 3. On the Jenkins - configure a node which runs on the CI server ('host_ci') , and on the deployment server if you have any.
 
 ### Prerequisites - Github 
-1. Add <jenkins url>/github-webhook/ to Github Webhooks.
+1. Add \<jenkins url\>/github-webhook/ to Github Webhooks.
 2. Security group - expose TCP 8080 access (or your Jenkins app port) from Github ip
 
 ### Prerequisites - Jenkins
