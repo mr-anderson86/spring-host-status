@@ -1,79 +1,71 @@
-# Simple java sprint web application + CI/CD using jenkins, maven and docker
+# Spring Host Status - a whole CI-CD process
 
-## Application description:
+## Description:
+
+This repository represents a Jenkins pipeline, which all runs on a whole CI-CD process.  
 This web application based on java and spring.  
 Originally, initiated using this website: https://start.spring.io/ it's a very good site, highly recommended.  
-  
-The app is a very simple web page which shows very basic host details such as:
-* Hostname
-* Operating system
-* CPU% usage
-* Memory status
-* etc  
-  
-Scroll down to the bottom of this README for screenshot.
+The final output is a docker container which runs this application, and the user can access your web application (via web browser) and see the new changes (without any action what so ever from his side).  
 
-## Project description:
-1. Runs a CI flow for the application
-2. Build and deploy the project on a docker container (using ansible playbook)
-3. Final output: a user will access your web application, and see the new changes (without any action what so ever from his side)
-
-## Prerequisites
-----
-### Prerequisites - application (codewise):  
-1. Project is based on Java (1.8) and including tests  
-2. Code should be pushed to Github (public repo)
-
-### Prerequisites - servers
-Two/Three servers:
-1. Orechestrator machine (ubuntu/redhat/any linux) - must have Jenkins.
-2. CI server - RedHat server, jdk 1.8, maven (3.3.9 is good), git, docker, ansible
-3. optional: deployment server (there you'll need only docker, but you will have to modify the Jenkinsfile to copy the docker image to this server and run container over there).
+Screenshots of final results can be found in the images directory :-)
 
 
-### Prerequisites - network
-1. Configure security groups:
-- allow SSH access to all machines
-- port 8085 for the application (CI machine or deployment machine)
-- Your Jenkins port for the orchestrator machine (8080/8081/http/https/whichever you choose)
-2. SSH access - configure a way to access with ssh (an opened user with password, or pem key file or any other method)
-3. On the Jenkins - configure a node which runs on the CI server ('host_ci') , and on the deployment server if you have any.
+Meaning:
+1. The pipeline first builds the Java application using Maven.
+2. Then it builds an image out of the Dockerfile.
+3. It runs a container using the image above.
+4. Final output: end user "logs in" your application, and seeing your "new feature", without him needing to do any action on his side.
 
-### Prerequisites - Github 
-1. Add \<jenkins url\>/github-webhook/ to Github Webhooks.
-2. Security group - expose TCP 8080 access (or your Jenkins app port) from Github ip
+The repository holds:
+1. The Java Spring web application (all under src)
+2. Dockerfile 
+3. Ansible playbook - which runs the docker container   
+(Just because I wanted it to be with ansible)
+4. Jenkinsfile - scripted (Maybe also declerative in the future)
 
-### Prerequisites - Jenkins
-1. In Jenkins ui - install plugins: github-plugin, git plugin (should come already with the jenkins by default)
-5. In the node 'host_ci' configuration - check "Environment variables" and add variable named 'M2_HOME' and value maven dir on the ci server. 
+## Prerequisites:
+1. Jenkins of course, with relevant node configured and running (Also needs ansible plugin installed).
+2. The builder machine needs git, JDK 1.8, Maven (3.3.9 is good) Docker and Ansible - all installed.  
+(Tested only on RedHat server, but it all might work also on ubuntu, CentOS and others)
+3. Don't forget to open port 8085 on your security group :)  
+(or whichever port you want to expose your app on, but don't forget to change in the code)
+4. Add \<your jenkins url\>/github-webhook/ into your repository Webhooks.  
+(Go to Settings -> Webhooks -> and add there your webhook).
 
+### 1. The Java Spring web application:
+* Based on Java 1.8 (Uses Maven for the build stage)
+* By default it listens on port 8085 (src/main/resources/application.properties)
+* The main index page is written here: src/main/java/com/spring/app/hoststatus/resource/HostResources.java
+* All it provides is a single page with some basic host status (Host name, OS, CPU% usage, Memory, etc...)
 
-----
-# CI/CD 
-Creation of CI/CD job:
-* Create a new pipeline job in Jenkins. job configuration:   
-  - Pipeline definition - Pipeline script from SCM
-  - SCM - git
-  - Repository URL - the link to current repository.
-  - Credentials - none.
-  - After saving configuration, run job manually once.
-    ## CI:  
-      - Job is being triggered on any push event on git repository.
-      - git pull   
-      - Build the project and run all the tests.
-      - Build the docker image which contains the spring application.
-    ## CD:  
-      - Runs a docker container using the image from above.
-  
-Screenshot below:  
-![Screenshot](images/cicd_screenshot.PNG)  
-  
+### 1. The Dockerfile does as follows:
+* Based on openjdk:8
+* Adds the target/host-status.jar file to the home dir of the container
+* Exposing port 8085
+* Runs the command: java -jar host-status.jar (turns up the web application)
 
-# Final output:
-User can access your application via web browser, going to the deployment IP address:8085  
-(unless you changed the port in the Dockerfile or in the docker run command in the Jenkinsfile).  
-Screenshot below:  
-![Screenshot](images/screenshot.PNG)
+### 2. The Ansible playbook does as follows:
+* Stops and removes container (if there was existing one)
+* Starts a new container based on the latest image which was built.
+* Removes the old docker image
 
+### 4. The Jenkinsfile:
+* It starts automatically on each git hub push event  
+(but you do need to run the job manually for the first time, after that this configuration is set for good.)
+* Agent is running on "builder_node"  
+(if you fork this repo, you can always change the node name)
+* Pull changes from the git repository
+* Build stage: Builds the project and run all the tests, using Maven.
+* Tests stage: runs junit, and archiving all jar files
+* Docker image stage: builds the new docker image, which contains the the Java web app (jar file), which contains all your latest changes.
+* Docker run stage: the "deploy" stage, it runs new container, using the new docker image from above (using the ansible playbook).
 
-### Ehe end :) ENJOY...
+## Other Ideas:
+* you can always install Nexus or Artifactory and deploy the jar files there.
+* Then you can run the docker build stage on a different host (node), and pull the jar from Nexus/Artifactory.
+* You can also docker push the image into your docker hub (or Nexus or others)
+* And then, on a different host/node (the "deployment" host) you can docker pull that image and run container from it.
+* This way it will represent a whole CI-CD process, which builds the project artifacts on 1 server, builds the docker image on another, and actually deploys the container on a different host.
+
+### The end, enjoy :)
+
