@@ -7,14 +7,13 @@ This web application based on java and spring.
 Originally, initiated using this website: https://start.spring.io/ it's a very good site, highly recommended.  
 The final output is a docker container which runs this application, and the user can access your web application (via web browser) and see the new changes (without any action what so ever from his side).  
 
-Screenshots of final results can be found in the images directory :-)
-
-
 Meaning:
 1. The pipeline first builds the Java application using Maven.
 2. Then it builds an image out of the Dockerfile.
 3. It runs a container using the image above.
 4. Final output: end user "logs in" your application, and seeing your "new feature", without him needing to do any action on his side.
+
+Screenshots of final results can be found in the images directory :-)  
 
 The repository holds:
 1. The Java Spring web application (all under src)
