@@ -14,7 +14,7 @@ Meaning:
 4. Final output: end user "logs in" your application, and seeing your "new feature", without him needing to do any action on his side.
 
 Screenshots of final results can be found in the images directory :-)  
-
+  
 The repository holds:
 1. The Java Spring web application (all under src)
 2. Dockerfile 
