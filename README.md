@@ -15,6 +15,7 @@ Meaning:
 
 Screenshots of final results can be found in the images directory :-)  
   
+
 The repository holds:
 1. The Java Spring web application (all under src)
 2. Dockerfile 
