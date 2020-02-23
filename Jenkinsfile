@@ -28,7 +28,7 @@ pipeline {
             steps {
                 /*If your are using docker push to remote registry,
                   You might want to update ansible/deployment.yml with the image's remote registry address*/
-                ansiblePlaybook( 'ansible/deployment.yml') {
+                ansiblePlaybook('ansible/deployment.yml') {
                     inventoryPath('ansible/hosts.ini')
                 }
                 echo "[INFO] Done! Go via web browrser to your host at port 8085."
