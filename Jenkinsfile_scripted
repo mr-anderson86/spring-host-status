@@ -18,7 +18,7 @@ node('builder_node') {
         //sh "docker login <registry> <credentials>"
         //sh "docker push host-status"
     }
-    stage('Docker run') {
+    stage('Deploy container') {
         /*If your are using docker push to remote registry,
           You might want to update ansible/deployment.yml with the image's remote registry address*/
         ansiblePlaybook( 
