@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Build code') {
             steps {
-                // Run the maven - compile, test, and pack to rpm
+                //Run the maven - compile, test, and pack to rpm
                 sh "mvn clean install"
                 junit '**/target/surefire-reports/TEST-*.xml'
                 archive 'target/*.jar'
