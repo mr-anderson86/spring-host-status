@@ -2,6 +2,9 @@
 
 ## Description:
 
+Please note: there's a "better" (newer) version of this project in my [GitLab repo](https://gitlab.com/mr-anderson86/spring-host-status).  
+There it runs via GitLab CI, uploads the Maven artifact to the repo, and pushes the Docker Image as well, and deploys the container in a remove OpenShift cluster.  
+  
 This repository represents a Jenkins pipeline, which all runs on a whole CI-CD process.  
 This web application based on java and spring.  
 Originally, initiated using this website: https://start.spring.io/ it's a very good site, highly recommended.  
