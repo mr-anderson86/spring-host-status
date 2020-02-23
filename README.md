@@ -16,7 +16,7 @@ Meaning:
 3. It runs a container using the image above.
 4. Final output: end user "logs in" your application, and seeing your "new feature", without him needing to do any action on his side.
 
-Screenshots of final results can be found in the images directory :-)  
+Screenshots of final results can be found in the [images directory](images) :-)  
   
 
 The repository holds:
