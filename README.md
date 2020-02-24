@@ -35,24 +35,24 @@ The repository holds:
 4. Add \<your jenkins url\>/github-webhook/ into your repository Webhooks.  
 (Go to Settings -> Webhooks -> and add there your webhook).
 
-### 1. The Java Spring web application:
+### The Java Spring web application:
 * Based on Java 1.8 (Uses Maven for the build stage)
 * By default it listens on port 8085 (src/main/resources/application.properties)
 * The main index page is written here: src/main/java/com/spring/app/hoststatus/resource/HostResources.java
 * All it provides is a single page with some basic host status (Host name, OS, CPU% usage, Memory, etc...)
 
-### 1. The Dockerfile does as follows:
+### The Dockerfile does as follows:
 * Based on openjdk:8
 * Adds the target/host-status.jar file to the home dir of the container
 * Exposing port 8085
 * Runs the command: java -jar host-status.jar (turns up the web application)
 
-### 2. The Ansible playbook does as follows:
+### The Ansible playbook does as follows:
 * Stops and removes container (if there was existing one)
 * Starts a new container based on the latest image which was built.
 * Removes the old docker image
 
-### 4. The Jenkinsfile:
+### The Jenkinsfile:
 * It starts automatically on each git hub push event  
 (but you do need to run the job manually for the first time, after that this configuration is set for good.)
 * Agent is running on "builder_node"  
